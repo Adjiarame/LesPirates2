@@ -3,14 +3,16 @@ package cartes;
 import personnages.Joueur;
 
 public class CartePopularite extends Cartes {
-    public CartePopularite(String nom, String description, int numCarte, int ptPopularite) {
-        super(nom, description, numCarte);
+    private int pointsPopularite;
+
+    public CartePopularite(String nom, int pointsPopularite) {
+        super(nom, TypeCarte.POPULARITE);
+        this.pointsPopularite = pointsPopularite;
     }
 
-    @Override
-    public void effet(Joueur joueur) {
-      //  Object ptPopularite;
-		//joueur.ajouterCartes (ptPopularite);
+    public void appliquerEffet(Joueur joueurActuel, Joueur adversaire) {
+        joueurActuel.ajouterPopularite(pointsPopularite);
     }
 }
-  
+
+

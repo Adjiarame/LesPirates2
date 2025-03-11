@@ -1,24 +1,33 @@
 package cartes;
+
 import personnages.Joueur;
 
 public abstract class Cartes {
     protected String nom;
-    protected String description;
-    protected int numCarte;
+    protected TypeCarte type;
 
-    public Cartes(String nom, String description, int numCarte) {
+    public Cartes(String nom, TypeCarte type) {
         this.nom = nom;
-        this.description = description;
-        this.numCarte = numCarte;
+        this.type = type;
     }
 
-    public String getNomCartes() {
+    public String getNom() {
         return nom;
     }
 
-    public int getNumeroCartes() {
-        return numCarte;
+    public TypeCarte getType() {
+        return type;
     }
 
-    public abstract void effet(Joueur joueur);
+    @Override
+    public String toString() {
+        return nom + " (" + type + ")";
+    }
+
+    public abstract void appliquerEffet(Joueur joueurActuel, Joueur adversaire);
+
+	public void appliquerEffet1(Joueur joueurActuel, Joueur adversaire) {
+		// TODO Auto-generated method stub
+		
+	}
 }

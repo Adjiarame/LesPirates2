@@ -1,53 +1,85 @@
 package personnages;
 
 import cartes.Cartes;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Joueur {
     private String nom;
-    private int vie;
+    private int pointsVie;
     private int popularite;
-    private List<Cartes> main;
+    private Cartes[] main;
+    private int nbCartesMain;
 
     public Joueur(String nom) {
         this.nom = nom;
-        this.vie = 5;
+        this.pointsVie = 5;
         this.popularite = 0;
-        this.main = new ArrayList<>();
+        this.main = new Cartes[6];
+        this.nbCartesMain = 0;
     }
 
     public String getNom() {
         return nom;
     }
 
-    public int getVie() {
-        return vie;
+    public int getPointsVie() {
+        return pointsVie;
     }
 
     public int getPopularite() {
         return popularite;
     }
 
-    public void ajouterCarte(Cartes cartes) {
-        main.add(cartes);
+    public Cartes[] getMain() {
+        return main;
     }
 
-    public void montrerCartes() {
-        for (int i = 0; i < main.size(); i++) {
-            System.out.println((i + 1) + ". " + main.get(i).getNomCartes());
+    public void setMain(Cartes[] nouvelleMain) {
+        this.main = nouvelleMain;
+    }
+
+    public void ajouterCarte(Cartes carte) {
+        if (nbCartesMain < main.length) {
+            main[nbCartesMain++] = carte;
+        } else {
+            System.out.println(" " + nom + " ne peut pas avoir plus de 6 cartes en main !");
         }
     }
 
-    public Cartes choisirCarte(int index) {
-        return main.remove(index);
+    public Cartes jouerCarte(int index) {
+        if (index >= 0 && index < nbCartesMain) {
+            Cartes carteJouee = main[index];
+            for (int i = index; i < nbCartesMain - 1; i++) {
+                main[i] = main[i + 1];
+            }
+            main[nbCartesMain - 1] = null;
+            nbCartesMain--;
+            return carteJouee;
+        }
+        return null;
     }
 
-    public void ajouterPopularite(int points) {
-        this.popularite += points;
+    public void reduireVie(int valeur) {
+        pointsVie -= valeur;
+        if (pointsVie < 0) {
+            pointsVie = 0;
+        }
     }
 
-    public void retirerVie(int points) {
-        this.vie -= points;
+    public void ajouterPopularite(int valeur) {
+        popularite += valeur;
+    }
+
+    public boolean estElimine() {
+        return pointsVie == 0;
+    }
+
+    public boolean estCapitaine() {
+        return popularite >= 5;
+    }
+
+    @Override
+    public String toString() {
+        return nom + " - Vie: " + pointsVie + ", Popularité: " + popularite;
     }
 }
+
