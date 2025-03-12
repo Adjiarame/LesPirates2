@@ -18,6 +18,7 @@ public abstract class Cartes {
     public TypeCarte getType() {
         return type;
     }
+    public abstract String getEffet();
 
     @Override
     public String toString() {

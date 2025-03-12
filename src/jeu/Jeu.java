@@ -26,14 +26,19 @@ public class Jeu {
     private Cartes[] creerPaquet() {
         Cartes[] paquet = new Cartes[30];
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 4; i++) {
             paquet[i] = new CartePopularite("Capitaine de Légende", 3);
-            paquet[i + 5] = new CartePopularite("Protecteur des Mers", 2);
-            paquet[i + 10] = new CartePopularite("Duel Gagné", 1);
-            paquet[i + 15] = new CarteAttaque("Coup Bas", 3);
-            paquet[i + 20] = new CarteAttaque("Sabordage", 2);
-            paquet[i + 25] = new CarteAttaque("Balles Perdues", 1);
+            paquet[i + 4] = new CartePopularite("Protecteur des Mers", 2);
+            paquet[i + 8] = new CartePopularite("Duel Gagné", 1);
+            paquet[i + 12] = new CarteAttaque("Coup Bas", 3);
+            paquet[i + 16] = new CarteAttaque("Sabordage", 2);
+            paquet[i + 20] = new CarteAttaque("Balles Perdues", 1);
         }
+        
+        paquet[24] = new CarteSpeciale("Parade Éclair", "Annule une attaque");
+        paquet[25] = new CarteSpeciale("Parade Éclair", "Annule une attaque");
+        paquet[26] = new CarteSpeciale("Tempête en Mer", "Mélange les mains");
+        paquet[27] = new CarteSpeciale("Tempête en Mer", "Mélange les mains");
 
         for (int i = paquet.length - 1; i > 0; i--) {
             int j = random.nextInt(i + 1);
@@ -73,7 +78,7 @@ public class Jeu {
             Cartes nouvelleCarte = piocherCarte();
             if (nouvelleCarte != null) {
                 joueurActuel.ajouterCarte(nouvelleCarte);
-                affichage.afficherPiocherCarte(joueurActuel.getNom(), nouvelleCarte);
+                affichage.afficherPiocherCartes(joueurActuel.getNom(), nouvelleCarte);
             }
 
             // Afficher cartes disponibles

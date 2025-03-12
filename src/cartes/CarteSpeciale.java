@@ -7,7 +7,16 @@ public class CarteSpeciale extends Cartes {
 
     public CarteSpeciale(String nom, String effet) {
         super(nom, TypeCarte.SPECIALE);
-        this.setEffet(effet);
+        this.effet = effet;
+    }
+    @Override
+    public String getEffet() {
+        if (nom.equals("Parade Éclair")) {
+            return "(Annule une attaque)";
+        } else if (nom.equals("Tempête en Mer")) {
+            return "(Mélange les mains des joueurs)";
+        }
+        return "(Effet spécial : " + effet + ")";
     }
 
     @Override
@@ -22,13 +31,7 @@ public class CarteSpeciale extends Cartes {
         }
     }
 
-	public String getEffet() {
-		return effet;
-	}
-
-	public void setEffet(String effet) {
-		this.effet = effet;
-	}
+	
 }
 
 

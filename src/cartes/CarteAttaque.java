@@ -9,15 +9,20 @@ public class CarteAttaque extends Cartes {
         super(nom, TypeCarte.ATTAQUE);
         this.degats = degats;
     }
-
-    @Override
-    public void appliquerEffet1(Joueur joueurActuel, Joueur adversaire) {
-        adversaire.reduireVie(degats);
+    public int getDegats() {
+        return degats;
     }
 
-	@Override
-	public void appliquerEffet(Joueur joueurActuel, Joueur adversaire) {
 
-		
-	}
+    @Override
+    public String getEffet() {
+        return "(-" + degats + " PV)";
+    }
+
+    @Override
+    public void appliquerEffet(Joueur joueurActuel, Joueur adversaire) {
+        adversaire.reduireVie(degats);
+    }
 }
+    
+
