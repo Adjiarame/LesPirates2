@@ -26,6 +26,9 @@ public abstract class Cartes {
     }
 
     public abstract void appliquerEffet(Joueur joueurActuel, Joueur adversaire);
+    public boolean estSpeciale() {
+        return false;
+    }
 
 	public void appliquerEffet1(Joueur joueurActuel, Joueur adversaire) {
 		// TODO Auto-generated method stub

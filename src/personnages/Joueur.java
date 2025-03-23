@@ -8,6 +8,7 @@ public class Joueur {
     private int popularite;
     private Cartes[] main;
     private int nbCartesMain;
+    private int derniersDegatsSubis;
 
     public Joueur(String nom) {
         this.nom = nom;
@@ -15,6 +16,7 @@ public class Joueur {
         this.popularite = 0;
         this.main = new Cartes[6];
         this.nbCartesMain = 0;
+        this.derniersDegatsSubis = 0;
     }
 
     public String getNom() {
@@ -41,7 +43,7 @@ public class Joueur {
         if (nbCartesMain < main.length) {
             main[nbCartesMain++] = carte;
         } else {
-            System.out.println(" " + nom + " ne peut pas avoir plus de 6 cartes en main !");
+            System.out.println(nom + " ne peut pas avoir plus de 6 cartes en main !");
         }
     }
 
@@ -59,11 +61,25 @@ public class Joueur {
     }
 
     public void reduireVie(int valeur) {
+        derniersDegatsSubis = valeur;
         pointsVie -= valeur;
         if (pointsVie < 0) {
             pointsVie = 0;
         }
     }
+
+    public void annulerDerniersDegats() {
+        pointsVie += derniersDegatsSubis;
+        derniersDegatsSubis = 0;
+    }
+
+    public boolean aSubiDesDegats() {
+        return derniersDegatsSubis > 0;
+    }
+    public void resetParadeEclair() {
+        derniersDegatsSubis = 0;  
+    }
+
 
     public void ajouterPopularite(int valeur) {
         popularite += valeur;
@@ -81,5 +97,12 @@ public class Joueur {
     public String toString() {
         return nom + " - Vie: " + pointsVie + ", Popularité: " + popularite;
     }
+    
+    public int getNombreDeCartes() {
+        int count = 0;
+        for (Cartes carte : main) {
+            if (carte != null) count++;
+        }
+        return count;
+    }
 }
-
